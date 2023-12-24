@@ -1,0 +1,6 @@
+Extra Features
+
+- clicking on note open modal to display the note's data
+- option to add image for a specific note, the image will be set as bg for sticky-note & header when note is viewed, like in notion. if no image is added then no bg and header
+- while adding note, 3 to 4 options can be given for priority selection - HIGH, MEDIUM, LOW. can also add priority select filter in header
+- can add menu in header which shows number of tasks every panel has on the basis of priority, clicking on any priority might hightlight that specific tasks

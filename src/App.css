@@ -1,0 +1,36 @@
+*{ margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; border: none; outline: none; }
+body{ padding: 1rem; background-color: #f4f4f4; }
+.btn{ background-color: #222; color: #fff; padding: 10px 20px; min-width: 150px; cursor: pointer; }
+input, textarea{ padding: 10px 20px; width: 100%; background-color: #fff; }
+h3{ font-size: 1.2em; font-weight: 500; }
+
+
+/* Header */
+header{ display: flex; align-items: center; gap: 10px; }
+
+
+/* Panels */
+.panels{ display: flex; align-items: flex-start; justify-content: center; gap: 10px; margin-top: 20px; }
+.panel{ width: 33.33%; min-height: calc(100vh - 2rem - 60px); }
+.panel h2{ font-weight: 500; text-align: center; text-transform: capitalize; padding-bottom: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px; }
+.panel .content_list{ display: flex; flex-direction: column; gap: 10px; position: relative; }
+.panel .content_list .archived_items_note{ position: absolute; z-index: -1; text-align: center; color: #989898; font-size: 20px; font-weight: 700; width: 100%; padding-top: 6px; }
+.panel .note{ padding: 10px; background-color: #fff; cursor: pointer; }
+.panel .note.archived{ display: none; }
+
+
+/* Menu */
+.menu{ background-color: #222; color: #f4f4f4; border-radius: 6px; min-width: 150px; position: absolute; box-shadow: 0 20px 50px #ccc; padding: 10px 0; }
+.menu p, .menu p .sub_menu label{ font-size: 12px; padding: 5px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; position: relative; }
+.menu p.disabled, .menu p .sub_menu label.disabled{ color: #555; pointer-events: none; cursor: default !important; }
+.menu p:hover, .menu p .sub_menu label:hover{ background-color: #3a3a3a; }
+.menu p .sub_menu{ position: absolute; top: 0; left: 100%; background-color: #222; color: #f4f4f4; border-radius: 6px; min-width: 150px; padding: 10px 0; display: flex; flex-direction: column; display: none; }
+.menu p:nth-child(2):hover .sub_menu{ display: block; }
+
+
+/* Add Modal */
+.add_modal{ background-color: #00000060; position: fixed; top: 0; left: 0; height: 100vh; width: 100vw; display: grid; place-items: center; }
+.add_modal form{ height: 80vh; width: 80vw; background-color: #f4f4f4; padding: 30px; display: flex; flex-direction: column; gap: 10px; }
+.add_modal form textarea{ height: 100px; resize: none; }
+.add_modal form :is(input, textarea){ padding: 12px; }
+.add_modal form div{ margin-top: auto; display: flex; gap: 10px; justify-content: flex-end; align-items: center; }

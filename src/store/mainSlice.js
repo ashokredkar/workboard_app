@@ -2,11 +2,13 @@ import { createSlice, current } from '@reduxjs/toolkit'
 
 const initialState = {
     showAddModal: false,
+    showViewModal: false,
+    viewedModalData: {},
     archivedVisible: false,
     clickedNoteData: {},
     menuPosition: {x: 0, y: 0},
     localStorageKey: 'workboard_app',
-    todo: [{id: 34, title: "ashok 423", desc: "Lorem Ipsgvrrum", archived: false}, {id: 45, title: "ashok 75", desc: "Lorerevem Ipsum 2", archived: false}],
+    todo: [{id: 34, title: "ashok 423", desc: "Lorem Ipsgvrrum", archived: false}, {id: 45, title: "ashok 75", desc: "Lorerevem Ipsum 2", archived: false}, {id: 3453, title: "ashok 42wd3", desc: "Lorem Ipsvwegvrrum", archived: false}],
     inprogress: [{id: 1, title: "ashok", desc: "Lorem Ipsum", archived: false}, {id: 2, title: "ashok 2", desc: "Lorem Ipsum 2", archived: false}],
     completed: [{id: 11, title: "asqadhok", desc: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum ", archived: false}, {id: 2222, title: "ashok 4w422", desc: "Lore2452m Ipsum 2", archived: false}],
 }
@@ -17,6 +19,35 @@ export const mainSlice = createSlice({
     reducers: {
         handleAddModal: (state, action) => {
             action.payload === "show" ? state.showAddModal = true : state.showAddModal = false;
+        },
+        handleViewModal: (state, action) => {
+            if(action.payload.toggle === "show"){
+                state.showViewModal = true;
+                state.viewedModalData = action.payload.item;
+            }else{
+                state.showViewModal = false;
+                state.viewedModalData = action.payload.item;
+                // if(action.payload.panel === "todo"){          // not passing panel name now, so checking on all three panels
+                    state.todo.map((item, idx) => {
+                        if(action.payload.item && item.id === action.payload.item.id){
+                            // state.todo.splice(idx, 1);
+                            state.todo[idx] = action.payload.item;
+                        }
+                    });
+                // }else if(action.payload.panel === "inprogress"){
+                    state.inprogress.map((item, idx) => {
+                        if(action.payload.item && item.id === action.payload.item.id){
+                            state.inprogress[idx] = action.payload.item;
+                        }
+                    });
+                // }else{
+                    state.completed.map((item, idx) => {
+                        if(action.payload.item && item.id === action.payload.item.id){
+                            state.completed[idx] = action.payload.item;
+                        }
+                    });
+                // }
+            }
         },
         setMenuPosition: (state, action) => {
             state.menuPosition.x = action.payload.x;
@@ -43,18 +74,22 @@ export const mainSlice = createSlice({
                 state.completed = state.completed.filter(item => item.id !== currentItem.id);
             }
         },
-        archiveTodo: (state) => {
-            state.clickedNoteData.item.archived = true;
-            const archivedItem = state.clickedNoteData.item;
-            // const allTodos = [[...state.todo], [...state.inprogress], [...state.completed]]
+        archiveTodo: (state, action) => {
+            if(action.payload == "archive"){
+                state.clickedNoteData.item.archived = true;
+            }else{
+                state.clickedNoteData.item.archived = false;
+            }
+            const newItem = state.clickedNoteData.item;
+            console.log(current(newItem));
             if(state.clickedNoteData.title === "todo"){
-                const newArray = state.todo.map(obj => obj.id === archivedItem.id ? archivedItem : obj);
+                const newArray = state.todo.map(obj => obj.id === newItem.id ? newItem : obj);
                 state.todo = newArray;
             }else if(state.clickedNoteData.title === "inprogress"){
-                const newArray = state.inprogress.map(obj => obj.id === archivedItem.id ? archivedItem : obj);
+                const newArray = state.inprogress.map(obj => obj.id === newItem.id ? newItem : obj);
                 state.inprogress = newArray;
             }else{
-                const newArray = state.completed.map(obj => obj.id === archivedItem.id ? archivedItem : obj);
+                const newArray = state.completed.map(obj => obj.id === newItem.id ? newItem : obj);
                 state.completed = newArray;
             }
         },
@@ -87,6 +122,7 @@ export const mainSlice = createSlice({
             const todoArray = action.payload[1];
             const progressArray = action.payload[2];
             const completedArray = action.payload[3];
+            console.log(todoArray, progressArray, completedArray);
             if(action.payload === ""){
                 state.todo = todoArray;
                 state.inprogress = progressArray;
@@ -101,6 +137,6 @@ export const mainSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { handleAddModal, setMenuPosition, setClickedNoteData, addTargetPanel, addTodo, deleteTodo, archiveTodo, shiftTodo, toggleArchived, searchTodos } = mainSlice.actions
+export const { handleAddModal, handleViewModal, setMenuPosition, setClickedNoteData, addTargetPanel, addTodo, deleteTodo, archiveTodo, shiftTodo, toggleArchived, searchTodos } = mainSlice.actions
 
 export default mainSlice.reducer

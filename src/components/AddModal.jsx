@@ -8,19 +8,24 @@ const AddModal = () => {
   
   const handleAddSubmit = (e) => {
     e.preventDefault();
-    const currentItem = {id: Math.round(Math.random()*1000000), title: e.target[0].value, desc: e.target[1].value, archived: false};
+    const currentItem = {id: Math.round(Math.random()*1000000), img: e.target[0].value, title: e.target[1].value, desc: e.target[2].value, archived: false};
     dispatch(addTodo(currentItem));
-    localStorage.setItem(localStorageKey, JSON.stringify(currentItem));
+    // localStorage.setItem(localStorageKey, JSON.stringify(currentItem));
+    dispatch(handleAddModal("hide"));
+  }
+  const handleAddCancel = (e) => {
+    e.preventDefault();
     dispatch(handleAddModal("hide"));
   }
   
   return (
     <section className='add_modal'>
       <form onSubmit={handleAddSubmit}>
+        <input type="text" placeholder='Image Link' />
         <input type="text" placeholder='Title' required />
         <textarea type="text" placeholder='Description' required />
         <div>
-          <button className='btn' onClick={() => dispatch(handleAddModal("hide"))}>Cancel</button>
+          <button className='btn' onClick={(e) => handleAddCancel(e)}>Cancel</button>
           <button type='submit' className='btn'>Add Todo</button>
         </div>
       </form>

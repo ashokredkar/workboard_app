@@ -1,18 +1,25 @@
 import React, { useEffect } from 'react'
 import { IoIosArrowForward } from "react-icons/io";
 import { useSelector, useDispatch } from 'react-redux'
-import { addTargetPanel, archiveTodo, deleteTodo, handleAddModal, setClickedNoteData, shiftTodo } from '../store/mainSlice'
+import { addTargetPanel, archiveTodo, deleteTodo, handleAddModal, shiftTodo } from '../store/mainSlice'
 
 const Menu = ({ menuPosition, disabledMenus }) => {
     const dispatch = useDispatch();
     const localStorageKey = useSelector((state) => state.main.localStorageKey);
+    const clickedNoteData = useSelector((state) => state.main.clickedNoteData);
 
     const handleMenuClick = (task) => {
         if(task === "delete"){
             dispatch(deleteTodo());
         }else {
-            dispatch(archiveTodo());
+            if(clickedNoteData.item.archived){
+                dispatch(archiveTodo("unarchive"));
+            }else{
+                dispatch(archiveTodo("archive"));
+            }
+            console.log(clickedNoteData.item.archived);
         }
+        // localStorage.setItem(localStorageKey, JSON.stringify(currentItem));
     }
     const handleSubOptionClick = (panelName) => {
         dispatch(addTargetPanel(panelName));
@@ -30,7 +37,7 @@ const Menu = ({ menuPosition, disabledMenus }) => {
                 </span>
             </p>
             <p className={disabledMenus.includes("Delete") ? "disabled" : ""} onClick={() => handleMenuClick("delete")}>Delete</p>
-            <p className={disabledMenus.includes("Archive") ? "disabled" : ""} onClick={() => handleMenuClick("archive")}>Archive</p>
+            <p className={disabledMenus.includes("Archive") ? "disabled" : ""} onClick={() => handleMenuClick("archive")}>{clickedNoteData.item.archived ? "Unarchive" : "Archive"}</p>
         </div>
     )
 }

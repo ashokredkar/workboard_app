@@ -8,7 +8,7 @@ import { setMenuPosition } from './store/mainSlice'
 import AddModal from './components/AddModal'
 import ViewModal from './components/ViewModal'
 
-function App() { // last element of state is getting stored only
+function App() {
   const dispatch = useDispatch();
   const todoArray = useSelector((state) => state.main.todo);
   const inProgressArray = useSelector((state) => state.main.inprogress);
@@ -31,11 +31,9 @@ function App() { // last element of state is getting stored only
 
   useEffect(() => {
     document.addEventListener("click", function(){ dispatch(setMenuPosition({ x: 0, y: 0 })); });     // without useEffect, this line will cause memory leak/infinite loop
-    // document.addEventListener("contextMenu", function(){ dispatch(setMenuPosition({ x: 0, y: 0 })); });     // without useEffect, this line will cause memory leak/infinite loop
     console.log(todoArray, inProgressArray, completedArray);
     return () => {
       document.removeEventListener("click", function(){ dispatch(setMenuPosition({ x: 0, y: 0 })); });
-      // document.removeEventListener("contextMenu", function(){ dispatch(setMenuPosition({ x: 0, y: 0 })); });
     }
   }, []);
 

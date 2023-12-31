@@ -37,7 +37,7 @@ const Menu = ({ menuPosition, disabledMenus }) => {
                 </span>
             </p>
             <p className={disabledMenus.includes("Delete") ? "disabled" : ""} onClick={() => handleMenuClick("delete")}>Delete</p>
-            <p className={disabledMenus.includes("Archive") ? "disabled" : ""} onClick={() => handleMenuClick("archive")}>{clickedNoteData.item.archived ? "Unarchive" : "Archive"}</p>
+            <p className={disabledMenus.includes("Archive") ? "disabled" : ""} onClick={() => handleMenuClick("archive")}>{clickedNoteData?.item?.archived ? "Unarchive" : "Archive"}</p>
         </div>
     )
 }

@@ -16,6 +16,7 @@ header{ display: flex; align-items: center; gap: 10px; }
 .panel .content_list{ display: flex; flex-direction: column; gap: 10px; position: relative; }
 .panel .content_list .archived_items_note{ position: absolute; z-index: -1; text-align: center; color: #989898; font-size: 20px; font-weight: 700; width: 100%; padding-top: 6px; }
 .panel .note{ padding: 10px; background-color: #fff !important; cursor: pointer; background-position: center !important; background-size: cover !important; background-repeat: no-repeat !important; }
+.panel .note p{ word-break: break-all; }
 .panel .note.archived{ display: none; }
 
 

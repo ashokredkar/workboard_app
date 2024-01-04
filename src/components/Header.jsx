@@ -8,7 +8,7 @@ const Header = ({ setSearchQuery }) => {
 
   return (
     <header>
-      <input type="search" placeholder='Search WorkSpace' onKeyUp={(e) => e.key == "Enter" && setSearchQuery(e.target.value)} />
+      <input type="search" placeholder='Search Title' onKeyUp={(e) => e.key == "Enter" && setSearchQuery(e.target.value)} />
       <button className="btn" onClick={() => dispatch(toggleArchived())}>{archivedVisible ? "Hide" : "Show"} Archived</button>
     </header>
   )

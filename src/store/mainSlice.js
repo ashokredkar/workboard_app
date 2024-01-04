@@ -8,9 +8,9 @@ const initialState = {
     clickedNoteData: {},
     menuPosition: {x: 0, y: 0},
     localStorageKey: 'workboard_app',
-    todo: [{id: 34, title: "ashok 423", desc: "Lorem Ipsgvrrum", archived: false}, {id: 45, title: "ashok 75", desc: "Lorerevem Ipsum 2", archived: false}, {id: 3453, title: "ashok 42wd3", desc: "Lorem Ipsvwegvrrum", archived: false}],
-    inprogress: [{id: 1, title: "ashok", desc: "Lorem Ipsum", archived: false}, {id: 2, title: "ashok 2", desc: "Lorem Ipsum 2", archived: false}],
-    completed: [{id: 11, title: "asqadhok", desc: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum ", archived: false}, {id: 2222, title: "ashok 4w422", desc: "Lore2452m Ipsum 2", archived: false}],
+    todo: [{id: 1, title: "Test Note 1", desc: "First test sticky note for todo panel", archived: false}, {id: 2, title: "Test Note 2", desc: "Second test sticky note for todo panel", archived: false}],
+    inprogress: [{id: 3, title: "Test Note 3", desc: "First test sticky note for inprogress panel", archived: false}, {id: 4, title: "Test Note 4", desc: "Second test sticky note for inprogress panel", archived: false}],
+    completed: [{id: 5, title: "Test Note 5", desc: "First test sticky note for completed panel", archived: false}, {id: 6, title: "Test Note 6", desc: "Second test sticky note for completed panel", archived: false}],
 }
 
 export const mainSlice = createSlice({
